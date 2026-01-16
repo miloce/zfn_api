@@ -54,7 +54,7 @@ $cookies = [
 ];
 
 $client = new ZfnClient($cookies, [
-    'base_url' => 'https://xxx.com/',
+    'base_url' => 'https://jwglxt.nut.edu.cn/jwglxt/',
     'timeout' => 5,
 ]);
 
