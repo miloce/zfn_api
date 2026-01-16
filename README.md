@@ -48,13 +48,11 @@
 <?php
 require_once __DIR__ . '/zfn_api.php';
 
-$cookies = [
-    'JSESSIONID' => 'your_session_id',
-    'route' => 'your_route_cookie',
-];
-
-$client = new ZfnClient($cookies, [
-    'base_url' => 'https://jwglxt.nut.edu.cn/jwglxt/',
+$client = new ZfnClient([
+    'cookies' => [
+        'JSESSIONID' => 'your_session_id',
+        'route' => 'your_route_cookie',
+    ],
     'timeout' => 5,
 ]);
 

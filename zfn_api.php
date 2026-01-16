@@ -2,16 +2,26 @@
 
 class ZfnClient
 {
-    private string $baseUrl;
+    private string $baseUrl = 'https://jwglxt.nut.edu.cn/jwglxt/';
     private array $headers;
-    private array $cookies;
-    private int $timeout;
+    private array $cookies = [
+        'JSESSIONID' => 'your_session_id',
+        'route' => 'your_route_cookie',
+    ];
+    private int $timeout = 3;
     private array $raspisanie;
 
-    public function __construct(array $cookies, array $options = [])
+    public function __construct(array $options = [])
     {
-        $this->baseUrl = rtrim($options['base_url'] ?? '', '/') . '/';
-        $this->timeout = $options['timeout'] ?? 3;
+        if (!empty($options['base_url'])) {
+            $this->baseUrl = rtrim($options['base_url'], '/') . '/';
+        }
+        if (!empty($options['cookies']) && is_array($options['cookies'])) {
+            $this->cookies = $options['cookies'];
+        }
+        if (isset($options['timeout'])) {
+            $this->timeout = $options['timeout'];
+        }
         $this->raspisanie = $options['raspisanie'] ?? [
             ['8:00', '8:40'],
             ['8:45', '9:25'],
@@ -32,7 +42,6 @@ class ZfnClient
             'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
             'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
         ];
-        $this->cookies = $cookies;
     }
 
     public function getInfo(): array
